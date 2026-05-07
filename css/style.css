@@ -1,0 +1,145 @@
+/* ---------------------------------------------------------
+   A10 CONSULTING - OFFICIAL STYLESHEET (V2 - RESPONSIVE)
+   --------------------------------------------------------- */
+
+/* 1. LOCAL FONTS SETUP */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-300.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-700.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-900.woff2') format('woff2');
+}
+
+/* 2. DESIGN VARIABLES */
+:root {
+    --navy: #0F2A44;
+    --accent: #3A6EA8;
+    --white: #ffffff;
+    --mid: #6b7280;
+    --gap: clamp(24px, 5vw, 60px);
+}
+
+/* 3. BASE RESET */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    line-height: 1.5;
+    overflow-x: hidden; /* Prevents side scrolling */
+}
+
+/* 4. RESPONSIVE TYPOGRAPHY FIX */
+h1, h2, .big-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* 5. NAVIGATION */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+nav.scrolled {
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(15, 42, 68, 0.1);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: -1px;
+    text-decoration: none;
+    color: var(--navy);
+}
+
+/* 6. HERO SECTION - FIXED FOR "MEASURABLE" */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 24px;
+}
+
+.hero h1 {
+    /* Using clamp to ensure it shrinks on small screens */
+    font-size: clamp(32px, 10vw, 96px); 
+    line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-bottom: 32px;
+}
+
+.hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 300;
+}
+
+/* 7. REVEAL ANIMATION */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+footer {
+    background: var(--navy);
+    color: white;
+    padding: 60px 24px;
+    text-align: center;
+}
