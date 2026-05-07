@@ -1,0 +1,123 @@
+/* ---------------------------------------------------------
+   A10 CONSULTING - OFFICIAL STYLESHEET (V3 - WITH WATERMARKS)
+   --------------------------------------------------------- */
+
+/* 1. LOCAL FONTS SETUP */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-300.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-700.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-900.woff2') format('woff2');
+}
+
+/* 2. DESIGN VARIABLES */
+:root {
+    --navy: #0F2A44;
+    --accent: #3A6EA8;
+    --white: #ffffff;
+    --grey-light: #f9fafb;
+    --mid: #6b7280;
+}
+
+/* 3. BASE RESET */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* 4. WATERMARK EFFECT FOR WHITE SECTIONS */
+.section-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40vw; /* Muito grande para ocupar o fundo */
+    font-weight: 900;
+    color: rgba(15, 42, 68, 0.03); /* Quase invisível, apenas 3% de opacidade */
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -2vw;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1; /* Garante que o texto fica por cima da marca de água */
+}
+
+/* 5. HERO & TYPOGRAPHY FIXES */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 24px;
+    position: relative;
+}
+
+.hero h1 {
+    font-size: clamp(32px, 10vw, 96px); 
+    line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-bottom: 32px;
+}
+
+.hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 300;
+}
+
+/* 6. NAVIGATION */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 24px;
+    transition: 0.3s;
+}
+
+nav.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    border-bottom: 1px solid rgba(15, 42, 68, 0.1);
+}
