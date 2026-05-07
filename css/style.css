@@ -1,0 +1,72 @@
+/* ---------------------------------------------------------
+   A10 CONSULTING - CORE STYLES & FONTS
+   --------------------------------------------------------- */
+
+/* LOCAL FONTS SETUP */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-300.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-700.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('../fonts/inter-v12-latin-900.woff2') format('woff2');
+}
+
+/* GLOBAL VARIABLES */
+:root {
+    --navy: #0F2A44;
+    --blue: #1A3A5C;
+    --accent: #3A6EA8;
+    --light: #C4D7FF;
+    --white: #ffffff;
+    --grey: #f5f7fa;
+    --mid: #6b7280;
+    --dark: #081828;
+    --gap: clamp(24px, 5vw, 60px);
+    --r: 20px;
+}
+
+/* RESET & BASE */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* Cola aqui abaixo todo o resto do CSS que estava entre as tags <style> do teu index.html original */
