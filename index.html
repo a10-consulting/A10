@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A10 Consulting — Performance Engineering</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<nav id="nav">
+    <div class="nav-container">
+        <a href="#" class="logo" style="text-decoration:none; color:var(--navy); font-weight:900; font-size:24px;">A10<span style="font-weight:300; color:#6b7280;">Consulting</span></a>
+    </div>
+</nav>
+
+<main>
+    <section class="section-container hero">
+        <div class="bg-watermark">A10</div> <div class="content-wrapper">
+            <div class="reveal">
+                <span style="color: var(--accent); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 12px;">Operating Model</span>
+                <h1>Impact is <br><em>Measurable.</em></h1>
+                <p style="font-size: clamp(16px, 4vw, 20px); color: #6b7280; max-width: 600px; margin-bottom: 40px;">
+                    Strategic advisory and execution power for complex business environments.
+                </p>
+                <a href="#contact" style="background: var(--navy); color: white; padding: 16px 32px; text-decoration: none; border-radius: 50px; font-weight: 600; display: inline-block;">Contact Us</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 A10 Consulting. All rights reserved.</p>
+</footer>
+
+<script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
