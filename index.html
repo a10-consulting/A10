@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>A10 Consulting — Execution · Operations · Performance</title>
+<meta name="description" content="A10 Consulting. Strategic business advisory for mining, exploration and industrial services. Built for complex environments, measured in results."/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap');
+/* ─────────────────────────────────────
+   A10 CONSULTING  —  style.css
+   Fonts: /fonts/  |  Updated 2026
+───────────────────────────────────── */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-v20-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-v20-latin-300.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-v20-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-v20-latin-900.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── TOKENS ── */
+:root {
+  --navy:   #0F2A44;
+  --blue:   #1A3A5C;
+  --accent: #3A6EA8;
+  --light:  #C4D7FF;
+  --white:  #ffffff;
+  --grey:   #f5f7fa;
+  --mid:    #6b7280;
+  --dark:   #081828;
+  --light2: #E8EEF7;
+  --gap:    clamp(24px, 5vw, 60px);
+  --r:      16px;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: 'Inter', Arial, sans-serif; background: var(--white); color: var(--navy); overflow-x: hidden; line-height: 1.5; }
+a { text-decoration: none; color: inherit; }
+button, input, textarea { font-family: 'Inter', Arial, sans-serif; }
+img, svg { display: block; max-width: 100%; }
+
+/* ── SHARED SECTION ── */
+section { padding: clamp(64px, 9vw, 110px) var(--gap); position: relative; overflow: hidden; }
+section > *:not(.wm) { position: relative; z-index: 1; }
+
+.section-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2.5px; color: var(--accent); margin-bottom: 16px; }
+.section-title  { font-size: clamp(32px, 5vw, 58px); font-weight: 900; letter-spacing: -3px; line-height: 1; color: var(--navy); margin-bottom: 24px; }
+.section-title em { font-style: italic; font-weight: 300; color: var(--accent); }
+.body-text { font-size: clamp(15px, 1.8vw, 17px); color: #374151; line-height: 1.75; max-width: 720px; }
+
+/* Watermark */
+.wm {
+  position: absolute; font-weight: 900; letter-spacing: -8px; line-height: 1;
+  user-select: none; pointer-events: none; white-space: nowrap;
+  font-size: clamp(180px, 28vw, 420px); right: -2%; bottom: -10%;
+  z-index: 0; opacity: .045;
+}
+
+
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 300;
+  height: 68px; padding: 0 var(--gap);
+  display: flex; align-items: center; justify-content: space-between;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background .35s, border-color .35s, box-shadow .3s;
+}
+nav.scrolled {
+  background: rgba(255,255,255,0.97);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom-color: rgba(15,42,68,0.08);
+  box-shadow: 0 2px 24px rgba(15,42,68,0.08);
+}
+
+.logo { display: flex; align-items: baseline; gap: 8px; flex-shrink: 0; }
+.logo-mark { font-size: clamp(20px,3vw,26px); font-weight: 900; letter-spacing: -1px; color: var(--white); transition: color .35s; }
+.logo-sub  { font-size: clamp(12px,1.8vw,15px); font-weight: 300; color: rgba(255,255,255,0.65); transition: color .35s; }
+nav.scrolled .logo-mark,
+nav.scrolled .logo-sub { color: var(--navy); }
+
+.nav-links { display: flex; align-items: center; gap: clamp(14px,2.5vw,32px); list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.6); transition: color .2s; }
+.nav-links a:hover { color: var(--white); }
+nav.scrolled .nav-links a { color: var(--mid); }
+nav.scrolled .nav-links a:hover { color: var(--navy); }
+
+.nav-cta { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--white); border: 1.5px solid rgba(255,255,255,0.4); padding: 8px 18px; flex-shrink: 0; transition: background .2s, color .2s, border-color .35s; }
+.nav-cta:hover { background: rgba(255,255,255,0.12); }
+nav.scrolled .nav-cta { color: var(--navy); border-color: var(--navy); }
+nav.scrolled .nav-cta:hover { background: var(--navy); color: var(--white); }
+
+/* Hamburger */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: transform .3s, opacity .3s, background .35s; }
+nav.scrolled .hamburger span { background: var(--navy); }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile drawer */
+.mobile-menu {
+  display: none; position: fixed; top: 68px; left: 0; right: 0; bottom: 0; inset-inline: 0; z-index: 250;
+  background: rgba(255,255,255,0.98); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu a { font-size: 20px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; }
+.mobile-menu a.m-cta { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; border: 1.5px solid var(--navy); padding: 12px 32px; }
+
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+#hero {
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--gap) clamp(52px,6vw,80px);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 60%, var(--blue) 100%);
+}
+#hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(-52deg, transparent, transparent 72px, rgba(255,255,255,0.014) 72px, rgba(255,255,255,0.014) 73px);
+}
+#hero::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 50% at 90% 6%, rgba(58,110,168,0.35) 0%, transparent 70%);
+}
+
+.hero-lines { position: absolute; inset: 0; pointer-events: none; }
+.hero-lines svg { width: 100%; height: 100%; opacity: .05; }
+.hl { stroke: var(--light); stroke-width: .7; fill: none; stroke-dasharray: 1600; stroke-dashoffset: 1600; animation: drawLine 4.5s ease forwards; }
+.hl:nth-child(2) { animation-delay: .6s; }
+.hl:nth-child(3) { animation-delay: 1.2s; }
+.hl:nth-child(4) { animation-delay: 1.8s; }
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+
+.hero-wm { right: -2%; bottom: -10%; font-size: clamp(180px,28vw,420px); color: rgba(255,255,255,0.032); font-weight: 900; letter-spacing: -12px; line-height: 1; position: absolute; user-select: none; pointer-events: none; animation: fadeUp 1.4s .5s both; }
+
+.hero-content { position: relative; z-index: 2; max-width: 940px; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: rgba(196,215,255,0.75); margin-bottom: clamp(18px,3vw,34px); animation: fadeUp .8s .15s both; }
+.hero-h1 { font-size: clamp(52px,9vw,116px); font-weight: 900; line-height: .92; letter-spacing: -4px; color: var(--white); margin: 0; animation: fadeUp .9s .3s both; }
+.hero-h1 em { font-style: italic; font-weight: 300; color: var(--light); }
+.hero-rule { width: clamp(36px,4vw,64px); height: 2px; background: var(--accent); margin: clamp(20px,3vw,36px) 0; animation: fadeUp .7s .55s both; }
+.hero-p { font-size: clamp(15px,1.8vw,18px); font-weight: 300; line-height: 1.75; color: rgba(255,255,255,0.55); max-width: 520px; animation: fadeUp .7s .7s both; }
+.hero-subline { margin-top: 18px; font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: rgba(196,215,255,0.62); animation: fadeUp .7s .82s both; }
+.hero-ctas { margin-top: clamp(24px,3.5vw,44px); display: flex; gap: 14px; flex-wrap: wrap; align-items: center; animation: fadeUp .7s .95s both; }
+
+.hero-scroll { position: absolute; bottom: clamp(20px,3vw,34px); right: var(--gap); z-index: 2; display: flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.25); animation: fadeUp .6s 1.6s both; }
+.hero-scroll-line { width: 28px; height: 1px; background: currentColor; flex-shrink: 0; }
+
+.btn-primary { display: inline-block; background: var(--white); color: var(--navy); padding: 13px 30px; font-size: 14px; font-weight: 700; letter-spacing: .3px; transition: background .2s, transform .15s; }
+.btn-primary:hover { background: var(--light); transform: translateY(-1px); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.6); font-size: 14px; font-weight: 400; letter-spacing: .3px; transition: color .2s, gap .2s; }
+.btn-ghost:hover { color: var(--white); gap: 14px; }
+.btn-ghost::after { content: '→'; }
+
+
+/* ══════════════════════════════
+   MARQUEE
+══════════════════════════════ */
+
+
+/* ══════════════════════════════
+   ABOUT  (dark)
+══════════════════════════════ */
+#about { background: var(--navy); color: var(--white); }
+#about .section-label { color: rgba(196,215,255,0.75); }
+#about .section-title { color: var(--white); }
+#about .section-title em { color: var(--light); }
+#about .wm { color: var(--white); }
+
+.about-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+.about-lead p { font-size: clamp(15px,1.8vw,17px); font-weight: 300; color: rgba(255,255,255,0.66); line-height: 1.85; margin-bottom: 18px; }
+
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.pillar {
+  background: linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.035));
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--r);
+  padding: clamp(20px,2.2vw,28px);
+  min-height: 128px;
+}
+.pillar h4 { font-size: 10px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--light); margin-bottom: 8px; }
+.pillar p  { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.55); line-height: 1.65; }
+
+
+/* ══════════════════════════════
+   ADVISORY  (white)
+══════════════════════════════ */
+#engagement { background: var(--white); }
+#engagement .wm { color: var(--navy); }
+
+.engagement-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 2px;
+}
+.engagement-item {
+  background: var(--grey);
+  padding: clamp(26px,3vw,38px) clamp(18px,2.4vw,28px);
+  min-height: 210px;
+  display: flex; flex-direction: column;
+  transition: background .25s, transform .2s, box-shadow .25s;
+}
+.engagement-item:hover { background: var(--navy); transform: translateY(-3px); box-shadow: 0 18px 50px rgba(15,42,68,0.14); }
+
+/* Icon shared styles */
+.ei-icon, .ps-icon, .exp-icon {
+  flex-shrink: 0;
+  color: var(--accent);
+  transition: color .25s;
+}
+.ei-icon  { width: 42px; height: 42px; margin-bottom: 20px; }
+.ei-icon svg { width: 100%; height: 100%; }
+
+.engagement-item:hover .ei-icon { color: var(--white); }
+
+.ei-title { font-size: 15px; font-weight: 900; color: var(--navy); margin-bottom: 8px; line-height: 1.2; transition: color .25s; }
+.ei-text  { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.65; transition: color .25s; }
+.engagement-item:hover .ei-title,
+.engagement-item:hover .ei-text  { color: var(--white); }
+.engagement-item:hover .ei-text  { color: rgba(255,255,255,0.65); }
+
+
+/* ══════════════════════════════
+   RESULTS  (grey)
+══════════════════════════════ */
+#results { background: var(--grey); }
+#results .wm { color: var(--navy); }
+
+.results-intro { max-width: 760px; }
+.metrics {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 2px;
+}
+.metric {
+  background: var(--white);
+  padding: clamp(24px,3.5vw,44px) clamp(18px,2.5vw,30px);
+  min-width: 0;
+  position: relative; overflow: hidden;
+  transition: background .25s, transform .2s, box-shadow .25s;
+}
+.metric::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .32s; }
+.metric:hover { background: var(--navy); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(15,42,68,0.18); }
+.metric:hover::after { transform: scaleX(1); }
+.metric:hover .metric-val { color: var(--white); }
+.metric:hover .metric-lbl { color: var(--light); }
+.metric:hover .metric-desc { color: rgba(255,255,255,0.45); }
+
+.metric-val { font-size: clamp(34px,4.4vw,52px); font-weight: 900; letter-spacing: -2px; line-height: 1; color: var(--navy); word-break: keep-all; overflow-wrap: normal; hyphens: none; transition: color .25s; }
+.metric-val.metric-val-long { font-size: clamp(27px,3.35vw,44px); line-height: 1.05; text-wrap: balance; }
+.metric-lbl  { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin: 10px 0 8px; white-space: normal; text-wrap: balance; transition: color .25s; }
+.metric-desc { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.55; transition: color .25s; }
+
+
+/* ══════════════════════════════
+   HOW WE WORK  (white)
+══════════════════════════════ */
+#process { background: var(--white); padding-top: clamp(52px,6vw,82px); padding-bottom: clamp(52px,6vw,82px); }
+#process .wm { color: var(--navy); }
+
+.process-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 2px;
+}
+.process-step {
+  background: var(--grey);
+  padding: clamp(28px,3.2vw,42px) clamp(20px,2.6vw,32px);
+  min-height: 210px;
+  display: flex; flex-direction: column;
+  border: 1px solid rgba(15,42,68,0.05);
+  transition: background .25s, transform .2s, box-shadow .25s;
+}
+.process-step:hover { background: var(--navy); transform: translateY(-3px); box-shadow: 0 18px 50px rgba(15,42,68,0.16); }
+
+.ps-icon { width: 40px; height: 40px; margin-bottom: 22px; flex-shrink: 0; }
+.ps-icon svg { width: 100%; height: 100%; }
+.process-step:hover .ps-icon { color: var(--white); }
+
+.ps-title { font-size: 16px; font-weight: 900; color: var(--navy); margin-bottom: 8px; transition: color .25s; }
+.ps-text  { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.65; transition: color .25s; }
+.process-step:hover .ps-title { color: var(--white); }
+.process-step:hover .ps-text  { color: rgba(255,255,255,0.65); }
+
+
+/* ══════════════════════════════
+   SECTORS  (grey)
+══════════════════════════════ */
+#expertise { background: var(--grey); }
+#expertise .wm { color: var(--navy); }
+
+.exp-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.exp-card {
+  background: var(--white);
+  border-radius: var(--r);
+  border: 1px solid rgba(15,42,68,0.07);
+  padding: clamp(28px,4vw,48px);
+  min-height: 260px;
+  position: relative; overflow: hidden;
+  transition: background .25s, box-shadow .25s;
+}
+.exp-card:hover { background: var(--navy); box-shadow: 0 20px 60px rgba(15,42,68,0.2); }
+
+.exp-icon { width: 46px; height: 46px; margin-bottom: 22px; color: var(--accent); transition: color .25s; }
+.exp-icon svg { width: 100%; height: 100%; overflow: visible; }
+.exp-card:hover .exp-icon { color: var(--light); }
+
+.exp-title { font-size: clamp(20px,2.6vw,26px); font-weight: 900; letter-spacing: -0.5px; color: var(--navy); margin-bottom: 12px; transition: color .25s; }
+.exp-body  { font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--mid); margin-bottom: 24px; transition: color .25s; }
+.exp-card:hover .exp-title { color: var(--white); }
+.exp-card:hover .exp-body  { color: rgba(255,255,255,0.58); }
+
+.exp-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.exp-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(58,110,168,0.28); padding: 4px 10px; border-radius: 4px; transition: color .25s, border-color .25s; }
+.exp-card:hover .exp-tag { color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.15); }
+
+
+/* ══════════════════════════════
+   GLOBAL PRESENCE  (dark)
+══════════════════════════════ */
+#presence { background: var(--dark); padding-bottom: clamp(48px,6vw,72px); }
+#presence .section-label { color: rgba(196,215,255,0.75); }
+#presence .section-title { color: var(--white); }
+#presence .wm { color: var(--white); }
+.presence-text { color: rgba(255,255,255,0.55); max-width: 560px; }
+
+.office-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 48px; }
+.office-card { background: rgba(255,255,255,0.03); border-top: 2px solid transparent; padding: clamp(22px,3vw,32px) clamp(16px,2.5vw,26px); transition: border-color .25s, background .22s; }
+.office-card:hover { border-top-color: var(--light); background: rgba(58,110,168,0.08); }
+.office-dot    { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-bottom: 12px; box-shadow: 0 0 0 4px rgba(58,110,168,0.2); }
+.office-city   { font-size: clamp(17px,2.2vw,22px); font-weight: 900; color: var(--white); letter-spacing: -.5px; margin-bottom: 3px; }
+.office-country{ font-size: 11px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 8px; }
+.office-region { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); }
+
+
+/* ══════════════════════════════
+   CONTACT  (white)
+══════════════════════════════ */
+#contact { background: var(--white); }
+#contact .wm { color: var(--navy); left: 50%; right: auto; transform: translateX(-50%); }
+
+.contact-inner { position: relative; z-index: 1; }
+.contact-box {
+  background: var(--dark);
+  border-radius: 24px;
+  padding: clamp(36px,5vw,64px);
+  max-width: 800px;
+  margin: 0 auto;
+}
+.contact-box .section-label { color: rgba(196,215,255,0.7); }
+.contact-box .section-title { color: var(--white); margin-bottom: 12px; }
+.contact-box .section-title em { color: var(--light); }
+.contact-box .body-text { color: rgba(255,255,255,0.52); margin-bottom: 32px; }
+
+.cform { display: flex; flex-direction: column; gap: 14px; }
+.cform input,
+.cform textarea {
+  width: 100%; padding: 14px 16px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  color: var(--white); font-size: 14px; font-weight: 300;
+  outline: none; -webkit-appearance: none;
+  transition: border-color .2s, background .2s;
+}
+.cform input::placeholder,
+.cform textarea::placeholder { color: rgba(255,255,255,0.35); }
+.cform input:focus,
+.cform textarea:focus { border-color: rgba(196,215,255,0.4); background: rgba(255,255,255,0.1); }
+.cform textarea { min-height: 120px; resize: vertical; }
+.cform-submit {
+  align-self: flex-start; background: var(--white); color: var(--navy);
+  padding: 13px 30px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; letter-spacing: .3px;
+  transition: background .2s, transform .15s;
+}
+.cform-submit:hover { background: var(--light); transform: translateY(-1px); }
+.contact-note { text-align: center; font-size: 11px; font-weight: 300; color: var(--mid); letter-spacing: 1px; margin-top: 16px; }
+
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  background: var(--dark);
+  padding: clamp(22px,3vw,34px) var(--gap);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.ft-logo-a10 { font-size: 16px; font-weight: 900; color: var(--white); letter-spacing: -1px; }
+.ft-logo-c   { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.3); margin-left: 6px; }
+.ft-links    { display: flex; gap: clamp(10px,1.8vw,22px); flex-wrap: wrap; }
+.ft-links a  { font-size: 11px; color: rgba(255,255,255,0.28); letter-spacing: .5px; transition: color .2s; }
+.ft-links a:hover { color: var(--white); }
+.ft-links a[target="_blank"] { color: rgba(196,215,255,0.5); }
+.ft-links a[target="_blank"]:hover { color: var(--white); }
+.ft-copy { font-size: 11px; color: rgba(255,255,255,0.18); }
+
+
+/* ══════════════════════════════
+   ANIMATIONS
+══════════════════════════════ */
+@keyframes fadeUp { 0% { opacity: 0; transform: translateY(24px); } 100% { opacity: 1; transform: translateY(0); } }
+
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal, .hero-eyebrow, .hero-h1, .hero-rule, .hero-p, .hero-subline, .hero-ctas, .hero-wm { opacity: 1; transform: none; }
+}
+
+
+/* ══════════════════════════════
+   SVG ICON DEFAULTS
+══════════════════════════════ */
+.ei-icon svg,
+.ps-icon svg,
+.exp-icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 1200px) {
+  .engagement-grid,
+  .metrics,
+  .process-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 1024px) {
+  .about-grid    { grid-template-columns: 1fr; gap: 36px; }
+  .pillars       { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger   { display: flex; }
+  .mobile-menu { display: flex; }
+
+  .hero-wm, .hero-scroll { display: none; }
+  .about-grid  { grid-template-columns: 1fr; gap: 28px; }
+  .pillars     { grid-template-columns: 1fr; }
+  .exp-grid    { grid-template-columns: 1fr; }
+  .office-cards{ grid-template-columns: 1fr; }
+  .wm          { display: none; }
+
+  section { padding: 56px var(--gap); }
+  #process { padding-top: 48px; padding-bottom: 48px; }
+  footer   { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .metrics,
+  .process-grid,
+  .engagement-grid { grid-template-columns: 1fr; }
+  .engagement-item,
+  .process-step { min-height: auto; }
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+  .contact-box { padding: 28px 20px; }
+  .section-title { letter-spacing: -2px; }
+  .metric-val,
+  .metric-val.metric-val-long { font-size: clamp(34px,12vw,54px); }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="logo">
+    <span class="logo-mark">A10</span>
+    <span class="logo-sub">Consulting</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">A10</a></li>
+    <li><a href="#engagement">Advisory</a></li>
+    <li><a href="#expertise">Sectors</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#presence">Global Reach</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Begin the Conversation</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about">A10</a>
+  <a href="#engagement">Advisory</a>
+  <a href="#expertise">Sectors</a>
+  <a href="#results">Results</a>
+  <a href="#presence">Global Reach</a>
+  <a href="#contact" class="m-cta">Begin the Conversation</a>
+</div>
+
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-lines" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <line class="hl" x1="0" y1="300" x2="1440" y2="300"/>
+      <line class="hl" x1="0" y1="600" x2="1440" y2="600"/>
+      <line class="hl" x1="720" y1="0" x2="720" y2="900"/>
+      <line class="hl" x1="1200" y1="0" x2="1200" y2="900"/>
+    </svg>
+  </div>
+  <div class="hero-wm" aria-hidden="true">A10</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Execution · Operations · Performance</p>
+    <h1 class="hero-h1">Focus.<br/>Execution.<br/><em>Impact.</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-p">Strategic business advisory with global execution power. Built for complex environments, measured in results.</p>
+    <p class="hero-subline">Operations. Infrastructure. Performance.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Begin the Conversation</a>
+      <a href="#about" class="btn-ghost">Discover A10</a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"><span class="hero-scroll-line"></span>Scroll</div>
+</section>
+
+
+
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wm" aria-hidden="true">A10</div>
+  <p class="section-label reveal">About A10</p>
+  <h2 class="section-title reveal">Built for complex<br/><em>environments.</em></h2>
+  <div class="about-grid">
+    <div class="about-lead reveal">
+      <p>A10 Consulting works with executive teams, boards and project leaders facing complex operational, commercial and execution challenges.</p>
+      <p>We work at the intersection of operations, infrastructure, supply chain and business performance, helping organisations move from strategy into disciplined execution.</p>
+      <p>With strong exposure to mining, exploration and industrial services, we understand the operational realities behind large-scale projects, remote environments and performance-critical operations.</p>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <h4>Mission</h4>
+        <p>To work alongside ambitious leaders and help them deliver outcomes that genuinely change the trajectory of their organisations.</p>
+      </div>
+      <div class="pillar">
+        <h4>Execution</h4>
+        <p>We are accountable for results, not reports. Strategy that cannot be executed is not strategy.</p>
+      </div>
+      <div class="pillar">
+        <h4>Confidentiality</h4>
+        <p>Every engagement is handled with complete discretion. Your business stays your business.</p>
+      </div>
+      <div class="pillar">
+        <h4>Sector Knowledge</h4>
+        <p>Strategic breadth with strong depth in mining, exploration, infrastructure and industrial services.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ADVISORY -->
+<section id="engagement">
+  <div class="wm" aria-hidden="true">A10</div>
+  <p class="section-label reveal">Advisory</p>
+  <h2 class="section-title reveal">Where execution<br/><em>matters most.</em></h2>
+  <p class="body-text reveal">We support initiatives where operational clarity, commercial discipline and delivery speed directly influence business outcomes.</p>
+
+  <div class="engagement-grid">
+
+    <!-- Operational Readiness: radar / target scan -->
+    <div class="engagement-item reveal">
+      <div class="ei-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="24" r="18"/>
+          <circle cx="24" cy="24" r="11"/>
+          <circle cx="24" cy="24" r="4" fill="currentColor" stroke="none"/>
+          <line x1="24" y1="6" x2="24" y2="2"/>
+          <line x1="24" y1="46" x2="24" y2="42"/>
+          <line x1="6" y1="24" x2="2" y2="24"/>
+          <line x1="46" y1="24" x2="42" y2="24"/>
+          <path d="M30 18l4-4" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <div class="ei-title">Operational Readiness</div>
+      <div class="ei-text">Preparing organisations, assets and teams for safe and effective execution.</div>
+    </div>
+
+    <!-- Infrastructure Delivery: structural beams / bridge -->
+    <div class="engagement-item reveal">
+      <div class="ei-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 36h40"/>
+          <path d="M10 36V26"/>
+          <path d="M38 36V26"/>
+          <path d="M4 26h40"/>
+          <path d="M10 26L4 14"/>
+          <path d="M38 26l6-12"/>
+          <path d="M10 26l14-12 14 12"/>
+          <path d="M24 14v12"/>
+        </svg>
+      </div>
+      <div class="ei-title">Infrastructure Delivery</div>
+      <div class="ei-text">Structuring complex delivery programmes across sites, contractors and stakeholders.</div>
+    </div>
+
+    <!-- Supply Chain: nodes in a chain / network flow -->
+    <div class="engagement-item reveal">
+      <div class="ei-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="18" width="12" height="12" rx="2"/>
+          <rect x="18" y="8" width="12" height="12" rx="2"/>
+          <rect x="18" y="28" width="12" height="12" rx="2"/>
+          <rect x="33" y="18" width="12" height="12" rx="2"/>
+          <line x1="15" y1="22" x2="18" y2="16"/>
+          <line x1="15" y1="26" x2="18" y2="34"/>
+          <line x1="30" y1="16" x2="33" y2="22"/>
+          <line x1="30" y1="34" x2="33" y2="26"/>
+        </svg>
+      </div>
+      <div class="ei-title">Supply Chain &amp; Logistics</div>
+      <div class="ei-text">Designing practical systems that keep remote and complex operations moving.</div>
+    </div>
+
+    <!-- Procurement: handshake / contract -->
+    <div class="engagement-item reveal">
+      <div class="ei-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 30c0 0 4-4 8-2l6 3c2 1 5 1 7-1l10-8c1-1 3 0 3 2s-1 3-2 4L26 38c-2 2-5 3-8 2l-12-3"/>
+          <path d="M4 26l4 8"/>
+          <path d="M44 22l-4 8"/>
+          <path d="M20 22l4-8 8 4-3 5"/>
+        </svg>
+      </div>
+      <div class="ei-title">Procurement &amp; Commercial</div>
+      <div class="ei-text">Improving sourcing, contracting, cost control and supplier performance.</div>
+    </div>
+
+    <!-- Project Integration: interlocking rings / Venn -->
+    <div class="engagement-item reveal">
+      <div class="ei-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="24" r="12"/>
+          <circle cx="30" cy="24" r="12"/>
+          <path d="M24 13.6c2.8 2.2 4.6 5.5 4.6 10.4s-1.8 8.2-4.6 10.4"/>
+          <path d="M24 13.6c-2.8 2.2-4.6 5.5-4.6 10.4s1.8 8.2 4.6 10.4"/>
+        </svg>
+      </div>
+      <div class="ei-title">Project Integration</div>
+      <div class="ei-text">Aligning scope, resources, governance and execution across competing priorities.</div>
+    </div>
+
+    <!-- Remote Operations: location pin / terrain -->
+    <div class="engagement-item reveal">
+      <div class="ei-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 6c-6.6 0-12 5.4-12 12 0 8 12 22 12 22s12-14 12-22c0-6.6-5.4-12-12-12z"/>
+          <circle cx="24" cy="18" r="4"/>
+          <path d="M10 42h28"/>
+          <path d="M6 38l4 4M42 38l-4 4"/>
+        </svg>
+      </div>
+      <div class="ei-title">Remote Operations</div>
+      <div class="ei-text">Supporting delivery in frontier environments with limited infrastructure and high complexity.</div>
+    </div>
+
+    <!-- Performance Improvement: upward trend with delta -->
+    <div class="engagement-item reveal">
+      <div class="ei-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 38h36"/>
+          <path d="M6 38V10"/>
+          <polyline points="10,32 20,20 30,26 42,10"/>
+          <polyline points="36,10 42,10 42,16"/>
+          <circle cx="10" cy="32" r="2.5" fill="currentColor" stroke="none"/>
+          <circle cx="20" cy="20" r="2.5" fill="currentColor" stroke="none"/>
+          <circle cx="30" cy="26" r="2.5" fill="currentColor" stroke="none"/>
+          <circle cx="42" cy="10" r="2.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div class="ei-title">Performance Improvement</div>
+      <div class="ei-text">Translating operational data and field reality into measurable productivity gains.</div>
+    </div>
+
+    <!-- Cost Transformation: scales / balance -->
+    <div class="engagement-item reveal">
+      <div class="ei-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="24" y1="8" x2="24" y2="40"/>
+          <path d="M18 40h12"/>
+          <path d="M8 16h32"/>
+          <path d="M8 16l-4 10c0 4 8 4 8 0L8 16z"/>
+          <path d="M40 16l4 10c0 4-8 4-8 0L40 16z"/>
+          <circle cx="24" cy="8" r="2.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div class="ei-title">Cost Transformation</div>
+      <div class="ei-text">Reducing structural inefficiency without weakening delivery capability.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- RESULTS -->
+<section id="results">
+  <div class="wm" aria-hidden="true">A10</div>
+  <div class="results-intro">
+    <p class="section-label reveal">Results</p>
+    <h2 class="section-title reveal">Results that<br/><em>define careers.</em></h2>
+    <p class="body-text reveal">Representative outcomes achieved across selected engagements. Results vary depending on operational context and implementation scope.</p>
+  </div>
+  <div class="metrics">
+    <div class="metric reveal">
+      <div class="metric-val">12–18%</div>
+      <div class="metric-lbl">Operating Cost Reduction</div>
+      <div class="metric-desc">Systematic identification and elimination of inefficiencies across operations.</div>
+    </div>
+    <div class="metric reveal">
+      <div class="metric-val">Up to 25%</div>
+      <div class="metric-lbl">Productivity Improvement</div>
+      <div class="metric-desc">Process optimisation that delivers measurable throughput improvements.</div>
+    </div>
+    <div class="metric reveal">
+      <div class="metric-val">+8pp</div>
+      <div class="metric-lbl">EBITDA Margin Increase</div>
+      <div class="metric-desc">Restructuring initiatives that fundamentally improve profitability.</div>
+    </div>
+    <div class="metric reveal">
+      <div class="metric-val metric-val-long">Measurable Impact</div>
+      <div class="metric-lbl">Culture Transformation</div>
+      <div class="metric-desc">Performance-driven culture programs with quantifiable outcomes.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- HOW WE WORK -->
+<section id="process">
+  <div class="wm" aria-hidden="true">A10</div>
+  <p class="section-label reveal">How We Work</p>
+  <h2 class="section-title reveal">Structured for clarity.<br/><em>Built for execution.</em></h2>
+  <p class="body-text reveal">Complex environments require alignment, speed and operational discipline. Our approach transforms uncertainty into structured execution, measurable progress and accountable delivery.</p>
+
+  <div class="process-grid">
+
+    <!-- Diagnose: magnifying glass over document -->
+    <div class="process-step reveal">
+      <div class="ps-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="21" cy="21" r="13"/>
+          <line x1="30" y1="30" x2="42" y2="42"/>
+          <line x1="15" y1="17" x2="27" y2="17"/>
+          <line x1="15" y1="21" x2="27" y2="21"/>
+          <line x1="15" y1="25" x2="22" y2="25"/>
+        </svg>
+      </div>
+      <div class="ps-title">Diagnose</div>
+      <div class="ps-text">Assess the real situation, not just the stated problem. Fast, direct and grounded in facts.</div>
+    </div>
+
+    <!-- Design: blueprint / pencil on grid -->
+    <div class="process-step reveal">
+      <div class="ps-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="8" width="32" height="32" rx="2"/>
+          <line x1="8" y1="18" x2="40" y2="18"/>
+          <line x1="18" y1="8" x2="18" y2="40"/>
+          <path d="M24 28l6-6 4 4-6 6-4-4z"/>
+          <path d="M23 29l-3 7 7-3"/>
+        </svg>
+      </div>
+      <div class="ps-title">Design</div>
+      <div class="ps-text">Build a practical strategy with clear logic, defined priorities and a path to execution.</div>
+    </div>
+
+    <!-- Execute: rocket / launch -->
+    <div class="process-step reveal">
+      <div class="ps-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 6c0 0 10 4 12 18l-6 6H18l-6-6C14 10 24 6 24 6z"/>
+          <circle cx="24" cy="22" r="4"/>
+          <path d="M18 30l-4 8 8-2"/>
+          <path d="M30 30l4 8-8-2"/>
+          <path d="M12 24c-3 2-5 6-4 10"/>
+          <path d="M36 24c3 2 5 6 4 10"/>
+        </svg>
+      </div>
+      <div class="ps-title">Execute</div>
+      <div class="ps-text">Work alongside the team. Own the outcome, not only the recommendation.</div>
+    </div>
+
+    <!-- Deliver: flag on summit / checkmark -->
+    <div class="process-step reveal">
+      <div class="ps-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="8,26 18,36 40,12"/>
+          <circle cx="24" cy="24" r="18"/>
+        </svg>
+      </div>
+      <div class="ps-title">Deliver</div>
+      <div class="ps-text">Measure results in numbers. Leave capability in the organisation, not dependency on us.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- SECTORS -->
+<section id="expertise">
+  <div class="wm" aria-hidden="true">A10</div>
+  <p class="section-label reveal">Sectors</p>
+  <h2 class="section-title reveal">Deep operational<br/><em>understanding.</em></h2>
+
+  <div class="exp-grid">
+
+    <!-- Mining & Exploration -->
+    <div class="exp-card reveal">
+      <div class="exp-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Mountain silhouette, well proportioned -->
+          <polyline points="4,38 16,16 26,28 32,20 44,38"/>
+          <line x1="4" y1="38" x2="44" y2="38"/>
+          <!-- Drill / pickaxe cross -->
+          <line x1="32" y1="8" x2="38" y2="14"/>
+          <line x1="38" y1="8" x2="32" y2="14"/>
+          <path d="M30 10c-4-2-8-1-11 3" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <div class="exp-title">Mining &amp; Exploration</div>
+      <div class="exp-body">We understand the complexity of mining and exploration environments: capital intensity, regulatory pressure, remote operations, commodity cycles and the need to move quickly without losing discipline.</div>
+      <div class="exp-tags">
+        <span class="exp-tag">Exploration Support</span>
+        <span class="exp-tag">Operational Readiness</span>
+        <span class="exp-tag">Asset Optimisation</span>
+        <span class="exp-tag">Cost Transformation</span>
+        <span class="exp-tag">Integration Planning</span>
+      </div>
+    </div>
+
+    <!-- Operations & Infrastructure: industrial tower + network -->
+    <div class="exp-card reveal">
+      <div class="exp-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Tower / pylon structure -->
+          <line x1="24" y1="6" x2="24" y2="38"/>
+          <path d="M24 6l-8 14h16L24 6z"/>
+          <line x1="16" y1="20" x2="32" y2="20"/>
+          <line x1="18" y1="28" x2="30" y2="28"/>
+          <!-- Ground base -->
+          <line x1="18" y1="38" x2="30" y2="38"/>
+          <line x1="14" y1="42" x2="34" y2="42"/>
+          <!-- Network nodes left and right -->
+          <circle cx="8" cy="32" r="3"/>
+          <circle cx="40" cy="32" r="3"/>
+          <line x1="11" y1="32" x2="16" y2="28"/>
+          <line x1="37" y1="32" x2="32" y2="28"/>
+        </svg>
+      </div>
+      <div class="exp-title">Operations &amp; Infrastructure</div>
+      <div class="exp-body">We support operational and infrastructure programmes where multiple workstreams, contractors and stakeholders need to be aligned around clear priorities and practical delivery.</div>
+      <div class="exp-tags">
+        <span class="exp-tag">Infrastructure Delivery</span>
+        <span class="exp-tag">Project Integration</span>
+        <span class="exp-tag">Remote Operations</span>
+        <span class="exp-tag">Contractor Management</span>
+        <span class="exp-tag">Operational Setup</span>
+      </div>
+    </div>
+
+    <!-- Supply Chain & Logistics: clean truck, fully within viewBox -->
+    <div class="exp-card reveal">
+      <div class="exp-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Trailer -->
+          <rect x="2" y="16" width="26" height="16" rx="2"/>
+          <!-- Cab -->
+          <path d="M28 22h8l6 7v5H28V22z"/>
+          <!-- Wheels -->
+          <circle cx="10" cy="34" r="3.5"/>
+          <circle cx="22" cy="34" r="3.5"/>
+          <circle cx="38" cy="34" r="3.5"/>
+          <!-- Cab window -->
+          <path d="M30 22v6h8l-4-6h-4z"/>
+        </svg>
+      </div>
+      <div class="exp-title">Supply Chain &amp; Logistics</div>
+      <div class="exp-body">We design and improve supply chain structures for demanding operating environments, from procurement strategy to vendor performance and last-mile delivery.</div>
+      <div class="exp-tags">
+        <span class="exp-tag">Supply Chain Design</span>
+        <span class="exp-tag">Logistics Strategy</span>
+        <span class="exp-tag">Procurement</span>
+        <span class="exp-tag">Vendor Management</span>
+        <span class="exp-tag">Field Delivery</span>
+      </div>
+    </div>
+
+    <!-- Performance & Cost: clean chart fully inside viewBox -->
+    <div class="exp-card reveal">
+      <div class="exp-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Y axis -->
+          <line x1="8" y1="6" x2="8" y2="40"/>
+          <!-- X axis -->
+          <line x1="8" y1="40" x2="42" y2="40"/>
+          <!-- Trend line -->
+          <polyline points="12,34 20,22 28,28 38,12"/>
+          <!-- Arrow head on trend -->
+          <polyline points="33,11 38,12 37,17"/>
+          <!-- Data dots -->
+          <circle cx="12" cy="34" r="2.2" fill="currentColor" stroke="none"/>
+          <circle cx="20" cy="22" r="2.2" fill="currentColor" stroke="none"/>
+          <circle cx="28" cy="28" r="2.2" fill="currentColor" stroke="none"/>
+          <circle cx="38" cy="12" r="2.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div class="exp-title">Performance &amp; Cost Transformation</div>
+      <div class="exp-body">We help organisations identify inefficiencies, improve productivity and strengthen margins through practical, measurable performance improvement programmes.</div>
+      <div class="exp-tags">
+        <span class="exp-tag">Cost Reduction</span>
+        <span class="exp-tag">Productivity</span>
+        <span class="exp-tag">EBITDA Improvement</span>
+        <span class="exp-tag">Operating Model</span>
+        <span class="exp-tag">Governance</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- GLOBAL PRESENCE -->
+<section id="presence">
+  <div class="wm" aria-hidden="true">A10</div>
+  <p class="section-label reveal">Global Reach</p>
+  <h2 class="section-title reveal">Three continents.<br/>One standard.</h2>
+  <p class="presence-text body-text reveal">Strategic presence across key markets, with a consistent operating standard.</p>
+  <div class="office-cards">
+    <div class="office-card reveal">
+      <div class="office-dot"></div>
+      <div class="office-city">Perth</div>
+      <div class="office-country">Australia</div>
+      <div class="office-region">Asia-Pacific</div>
+    </div>
+    <div class="office-card reveal">
+      <div class="office-dot"></div>
+      <div class="office-city">Cape Town</div>
+      <div class="office-country">South Africa</div>
+      <div class="office-region">Africa</div>
+    </div>
+    <div class="office-card reveal">
+      <div class="office-dot"></div>
+      <div class="office-city">Porto</div>
+      <div class="office-country">Portugal</div>
+      <div class="office-region">Europe</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wm" aria-hidden="true">A10</div>
+  <div class="contact-inner">
+    <div class="contact-box reveal">
+      <p class="section-label">Executive Contact</p>
+      <h2 class="section-title">When you're ready<br/>to move, <em>we're<br/>already there.</em></h2>
+      <p class="body-text">Every engagement starts with a direct conversation. Confidential, focused and without obligation.</p>
+      <form class="cform" action="https://formspree.io/f/xqendeng" method="POST">
+        <input type="text" name="Name" placeholder="Name" required/>
+        <input type="email" name="Email" placeholder="Email" required/>
+        <textarea name="Message" placeholder="Message" required></textarea>
+        <button type="submit" class="cform-submit">Begin the Conversation</button>
+      </form>
+    </div>
+    <p class="contact-note reveal">All inquiries are treated with absolute discretion.</p>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <span class="ft-logo-a10">A10</span>
+    <span class="ft-logo-c">Consulting</span>
+  </div>
+  <div class="ft-links">
+    <a href="#about">A10</a>
+    <a href="#engagement">Advisory</a>
+    <a href="#expertise">Sectors</a>
+    <a href="#results">Results</a>
+    <a href="#presence">Global Reach</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.linkedin.com/company/a10-consulting-com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+  <div class="ft-copy">© 2026 A10 Consulting. All rights reserved.</div>
+</footer>
+
+
+<script>
+/* Scroll reveal */
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 45);
+      ro.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* Nav scroll state */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* Hamburger */
+const hbtn = document.getElementById('hamburger');
+const hmenu = document.getElementById('mobileMenu');
+hbtn.addEventListener('click', () => {
+  hbtn.classList.toggle('open');
+  hmenu.classList.toggle('open');
+  document.body.style.overflow = hmenu.classList.contains('open') ? 'hidden' : '';
+});
+hmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  hbtn.classList.remove('open');
+  hmenu.classList.remove('open');
+  document.body.style.overflow = '';
+}));
+</script>
+
+</body>
+</html>
