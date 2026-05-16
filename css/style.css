@@ -229,7 +229,9 @@ textarea:focus-visible {
 }
 
 .hero-content {
+  width: 100%;
   max-width: 980px;
+  min-width: 0;
 }
 
 .eyebrow,
@@ -704,7 +706,7 @@ textarea {
   }
 
   .site-footer {
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
   }
 }
