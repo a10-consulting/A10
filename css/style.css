@@ -168,7 +168,55 @@ textarea:focus-visible {
   padding: 9px 16px;
 }
 
+/* Compatibility while CDN/browser caches expire older markup. */
+#nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: 72px;
+  padding: 0 var(--gap);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: var(--white);
+}
+
+#nav.scrolled {
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 32px rgba(8, 24, 40, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+#nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 28px);
+  list-style: none;
+}
+
+#nav .nav-links a[href="#about"],
+#nav .nav-links a[href="#engagement"],
+#nav .nav-links a[href="#expertise"],
+#nav .nav-links a[href="#results"],
+#nav .nav-links a[href="#presence"] {
+  display: none;
+}
+
 .hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 112px var(--gap) 72px;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(58, 110, 168, 0.42), transparent 34%),
+    repeating-linear-gradient(-52deg, transparent, transparent 18px, rgba(255, 255, 255, 0.018) 18px, rgba(255, 255, 255, 0.018) 19px),
+    linear-gradient(135deg, var(--dark) 0%, var(--navy) 58%, var(--blue) 100%);
+  color: var(--white);
+}
+
+#hero {
   min-height: 100svh;
   display: flex;
   align-items: center;
@@ -212,6 +260,34 @@ h1 {
   line-height: 0.94;
   letter-spacing: clamp(-4px, -0.45vw, -7px);
   font-weight: 900;
+}
+
+.hero-h1 {
+  max-width: 900px;
+  margin-bottom: 28px;
+  color: var(--white);
+  font-size: clamp(56px, 10vw, 124px);
+  line-height: 0.94;
+  letter-spacing: clamp(-4px, -0.45vw, -7px);
+  font-weight: 900;
+}
+
+.hero-h1 em {
+  color: var(--light);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.hero-p {
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 300;
+}
+
+.hero-eyebrow,
+.hero-subline {
+  color: rgba(196, 215, 255, 0.78);
 }
 
 h1 em,
