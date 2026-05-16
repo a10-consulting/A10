@@ -281,10 +281,12 @@ h1 {
 }
 
 .hero-p {
+  width: 100%;
   max-width: 620px;
   color: rgba(255, 255, 255, 0.68);
   font-size: clamp(17px, 2vw, 21px);
   font-weight: 300;
+  overflow-wrap: break-word;
 }
 
 .hero-eyebrow,
@@ -319,10 +321,12 @@ h3 {
 }
 
 .hero-lead {
+  width: 100%;
   max-width: 620px;
   color: rgba(255, 255, 255, 0.68);
   font-size: clamp(17px, 2vw, 21px);
   font-weight: 300;
+  overflow-wrap: break-word;
 }
 
 .hero-subline {
@@ -686,8 +690,19 @@ textarea {
   }
 
   h1 {
-    font-size: clamp(48px, 17vw, 72px);
-    letter-spacing: -3px;
+    font-size: clamp(42px, 14.5vw, 58px);
+    letter-spacing: -2px;
+  }
+
+  .hero-h1 {
+    font-size: clamp(42px, 14.5vw, 58px);
+    letter-spacing: -2px;
+  }
+
+  .hero-lead,
+  .hero-p {
+    max-width: 100%;
+    font-size: 16px;
   }
 
   h2 {
