@@ -713,8 +713,8 @@ textarea {
 
   .hero-lead,
   .hero-p {
-    width: calc(100vw - (var(--gap) * 2));
-    max-width: calc(100vw - (var(--gap) * 2));
+    width: min(320px, calc(100vw - (var(--gap) * 2)));
+    max-width: min(320px, calc(100vw - (var(--gap) * 2)));
     font-size: 16px;
   }
 
