@@ -645,9 +645,10 @@ textarea {
     min-height: 62px;
     align-items: center;
     flex-direction: row;
+    justify-content: flex-start;
     padding-top: 0;
     padding-bottom: 0;
-    gap: 14px;
+    gap: 10px;
     background: rgba(8, 24, 40, 0.98);
   }
 
@@ -658,15 +659,17 @@ textarea {
 
   .primary-nav {
     width: auto;
+    margin-left: auto;
+    flex-shrink: 0;
     overflow-x: visible;
     padding-bottom: 0;
-    gap: 10px;
-    font-size: 10px;
-    letter-spacing: 0.8px;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.6px;
   }
 
   .nav-cta {
-    padding: 7px 10px;
+    padding: 6px 8px;
   }
 
   .hero {
